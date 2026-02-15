@@ -17,9 +17,9 @@ Scope {
             right:true
 
           }
-          margins.left : 10
-          margins.right : 10
-          margins.top : 5
+          margins.left : 100
+          margins.right : 100
+          margins.top : 1
           exclusionMode: ExclusionMode.Exclusive
           color:"transparent"
           Pannel{

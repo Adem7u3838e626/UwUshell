@@ -1,15 +1,22 @@
 import QtQuick
 import QtQuick.Controls
+import Quickshell.Hyprland
+import Quickshell.Io 
+import Quickshell
 Rectangle {
     id: rectangle
     color: "transparent"
-    property string maincolor: "#121516"
-    property string secondcolor: "#111414"
-    property string textcolor: "#C2C6D5"
+    property string backgroundColor:"#040411"   // main bar background
+    property string panelColor:"#081121"        // widgets
+    property string accentColor:"#112848"       // hover، highlight
+    property string alertColor:""               // notifications
+    property string borderColor:"#010aab"              // borders
+    property string textColor:"#3152a0"         // text
+    // processes
+    property string currentTime :"time"
     Rectangle{
         id:main
-        color: maincolor
-        opacity: 0.7
+        color: backgroundColor
         radius: 50
         anchors.left: parent.left
         anchors.right: parent.right
@@ -21,7 +28,7 @@ Rectangle {
         anchors.bottomMargin: 0
         Rectangle{
             id:parameters
-            color: secondcolor
+            color: panelColor
             opacity: 0.7
             width: 150
             height: main.height -10
@@ -32,41 +39,13 @@ Rectangle {
         }
         Rectangle{
             id: workspaces
-            color: secondcolor
+            color: panelColor
             width: 250
             height: parent.height -8
             radius: 15
-            //border.color: borders
-            border.width: 0
             anchors.centerIn: parent
-            Row {
-                id:workspacerow
-                spacing: 3
-                anchors.centerIn: parent
-                Repeater{
-                    model: 10
-                    Rectangle{
-                        property int number: index +1
-                        width: 20
-                        height: 20
-                        visible: true
-                        radius: 15
-                        color: workspaces.activeWorkspace === number ? "#4CAF50" : "transparent"
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: workspaces.activeWorkspace = number
-                        }
-                        Text {
-                            visible: workspaces.activeWorksoace === number ? false : true
-                            color: "#40fdfdfd"
-                            text: index + 1
-                            font.pointSize: 10
-                            anchors.centerIn: parent
-                        }
-
-                    }
-                }
-
+            Test{
+              anchors.centerIn: parent
             }
         }
         Rectangle{
@@ -82,7 +61,7 @@ Rectangle {
                 id: row
                 spacing: 5
                 Text {
-                    text: qsTr("9:10 PM")
+                    text:now.getHours() 
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
@@ -90,7 +69,7 @@ Rectangle {
                     anchors.bottomMargin: 1
                     anchors.verticalCenterOffset: 0
                     font.pointSize: 14
-                    color: textcolor
+                    color: textColor
                 }
             }
         }
@@ -107,7 +86,7 @@ Rectangle {
                 anchors.centerIn: parent
                 anchors.verticalCenterOffset: 0
                 font.pointSize: 12
-                color: textcolor
+                color: textColor
             }
         }
         Rectangle{
@@ -121,7 +100,7 @@ Rectangle {
                 text: qsTr("app")
                 anchors.centerIn: parent
                 font.pointSize: 15
-                color: textcolor
+                color: textColor
             }
         }
         Rectangle{
@@ -137,5 +116,4 @@ Rectangle {
 
         }
     }
-
 }
