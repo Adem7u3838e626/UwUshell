@@ -22,9 +22,9 @@ RowLayout {
       implicitWidth: isActive ? 32 : 12
       radius: height / 2
       color: {
-          if (isActive) return "#0db9d7"
-          if (hasWindows) return "#7aa2f7"
-          return "#444b6a"
+          if (isActive) return Theme.color3
+          if (hasWindows) return Theme.color4
+          return Theme.color5
         }
       Behavior on implicitWidth {
           NumberAnimation { duration: 200; easing.type: Easing.OutCubic }

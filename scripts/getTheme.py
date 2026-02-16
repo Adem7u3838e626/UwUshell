@@ -22,6 +22,6 @@ with open(theme_path, "w") as theme:
     theme.write("QtObject {\n")
     theme.write(f'    property string wallpaper: "{wallpaper}"\n')
     for i, color in enumerate(colors):
-        theme.write(f'    property color color{i}: "{color}\n')
+        theme.write(f'    property color color{i}: "{color}"\n')
         i+=1
     theme.write("}\n")
