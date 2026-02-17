@@ -54,13 +54,13 @@ Rectangle {
               Text {
                 text : Qt.formatDateTime(clock.date, "HH:mm")
                 font.pointSize:14
-                color : Theme.color8
+                color : Theme.color6
               }
               Text {
                 visible:false
                 text : Qt.formatDateTime(clock.date, "ddd dd-MMM")
                 font.pointSize:12
-                color:Theme.color8
+                color:Theme.color6
                 opacity:0.7
               }
             }
