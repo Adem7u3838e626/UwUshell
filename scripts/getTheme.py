@@ -7,9 +7,9 @@ from activewindow import getactivewin
 json_path = os.path.expanduser("~/.cache/wal/colors.json")
 theme_path = os.path.expanduser("~/.config/quickshell/uwu/modules/Theme.qml")
 
+activewin=getactivewin()
 wallpaper =getwall()
 colors =[]
-activewin=getactivewin()
 
 with open(json_path, "r") as f:
     data = json.load(f)
@@ -23,12 +23,11 @@ try:
         theme.write("import QtQuick 2.15\n")
         theme.write("pragma Singleton\n")
         theme.write("QtObject {\n")
-        theme.write(f'    property string wallpaper: "{wallpaper}"\n')
+        theme.write(f'    property string wallpaper: "{wallpaper[0:len(wallpaper)-1]}"\n')
         for i, color in enumerate(colors):
             theme.write(f'    property color color{i}: "{color}"\n')
             i+=1
-        theme.write(f'property string activewindow: "{activewin}"')
+        theme.write(f'    property string activewindow: "{activewin}"\n')
         theme.write("}\n") 
 except:
     print("error writing fille")
-print(activewin)
