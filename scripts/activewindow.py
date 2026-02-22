@@ -1,29 +1,39 @@
-#!/usr/bin/env python3
 import os
 import socket
-import json
 
-# مسار socket الخاص بـ Hyprland
 runtime_dir = os.environ.get("XDG_RUNTIME_DIR")
 signature = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE")
+
 socket_path = f"{runtime_dir}/hypr/{signature}/.socket2.sock"
 
-# مسار حفظ JSON
-output_file = os.path.expanduser("~/.cache/activewindow.json")
+output_file = os.path.expanduser(
+    "~/.config/quickshell/uwu/modules/ActiveWindow.qml"
+)
 
-# إنشاء اتصال بالـ Unix socket
+os.makedirs(os.path.dirname(output_file), exist_ok=True)
+
 with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as s:
     s.connect(socket_path)
 
     while True:
-        data = s.recv(1024).decode("utf-8")
+        data = s.recv(4096).decode("utf-8")
+
         if not data:
             continue
+
         lines = data.splitlines()
+
         for line in lines:
             if line.startswith("activewindow>>"):
                 win_class = line.split(">>")[1].strip()
-                # كتابة اسم النافذة النشطة في ملف JSON
+                win_class_safe = win_class.replace('"', '\\"')
+
+                qml_content = f""""import QtQuick 2.15
+pragma Singleton
+QtObject {
+    property string wallpaper: '{win_class_safe}\n'
+}
+"""
                 with open(output_file, "w") as f:
-                    json.dump({"class": win_class}, f)
+                    f.write(qml_content)
 

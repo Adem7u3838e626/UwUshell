@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import Quickshell.Hyprland
+import Quickshell.Wayland
 import Quickshell.Io 
 import Quickshell
 Rectangle {
@@ -86,16 +87,16 @@ Rectangle {
         color: "transparent"
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: ai.right
-        anchors.leftMargin: 30
+        anchors.leftMargin: 55
         Activewindow{
 
         }
 
         Text {
             id: app
-            text: Activewindow
+            text: ToplevelManager.activeToplevel?.title ?? "Desktop"
             anchors.centerIn: parent
-            font.pointSize: 15
+            font.pointSize: 10
             color: Theme.color8
         }
     }
