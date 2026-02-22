@@ -88,9 +88,6 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: ai.right
         anchors.leftMargin: 55
-        Activewindow{
-
-        }
 
         Text {
             id: app
